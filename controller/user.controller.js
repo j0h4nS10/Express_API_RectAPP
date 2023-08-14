@@ -2,10 +2,11 @@ const { mongoose } = require("mongoose");
 
 const users = mongoose.model('Users')
 
-const createUser = async (req,res)=>{
-    const { userName, email, password} = req.body
+const createUser = async (req, res) => {
+    const { name, lastName, email, password } = req.body
     const user = new users({
-        userName,
+        name,
+        lastName,
         email,
         password
     })
@@ -16,37 +17,113 @@ const createUser = async (req,res)=>{
     })
 }
 
-const readAllusers = (req,res) => {
-    const data = users.find({})
-    res.json({message: "showing all data",
-    data: data
-})
-}
-
-const readUser = (req, res) => {
-    const {id} = req.params
-    res.json({
-        message: "showing user id",
-        data: users[(id)]
-    })
-}
-
-const updateUser = (req,res) => {
-    const { id } =  req.params
-    const { userName, email, password} = req.body
-    users[Number(id)] = {
-        userName,
-        email,
-        password
+const readAllusers = async (req, res) => {
+    try {
+        const respons = await users.find();
+        if (!users.lenght) {
+            res.status(404)
+            res.json({
+                message: "empty collection"
+            })
+        }
+        else {
+            res.status(200)
+            res.json({
+                message: "showing all data",
+                data: respons
+            })
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(400)
+        res.json({
+            message: "server error"
+        })
     }
-    res.json({
-        message: "user update",
-        data: users
-    })
 }
 
-const deleteUser = (req,res) => {
-    const { id } = req.params 
+const readUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await users.findById(id);
+        if (!user) {
+            res.status(404)
+            res.json({
+                message: `user not found with id ${id}`,
+            })
+        } else {
+            res.status(200)
+            res.json({
+                message: `User`,
+                data: user
+            })
+        }
+    } catch (err) {
+        console.error(err)
+        res.status(400)
+        res.json({
+            message: `server error`
+        })
+
+    }
+}
+
+const updateUser = async (req, res) => {
+    try {
+        const { id } = req.params
+        const userdb = await users.findById(id);
+        const { name, lastName, email, password } = req.body
+        if (!userdb) {
+            res.status(404)
+            res.json({
+                message: "user not found"
+            })
+        } else {
+            const updatedUser = await users.findByIdAndUpdate(
+                id,
+                { name, lastName, email, password },
+                { new: true }
+            );
+            res.status(200)
+            res.json({
+                message: `User update ${id}`,
+                data: updatedUser
+            })
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(400)
+        res.json({
+            message: "server error"
+        })
+
+    }
+}
+
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params
+        const userdb = await users.findById(id)
+        if (!userdb) {
+            res.status(404)
+            res.json({
+                message: "user not found"
+            })
+        } else {
+            const respons = await users.findByIdAndDelete(id)
+            res.status(200)
+            res.json({
+                message: "user deleted",
+                data: respons
+            })
+        }
+    } catch (err) {
+        console.error(err)
+        res.status(400)
+        res.json({
+            message: "server error"
+        })
+    }
 }
 
 module.exports = {

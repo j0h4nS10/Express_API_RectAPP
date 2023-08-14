@@ -5,11 +5,11 @@ const userRouter = require('./user.routes')
 
 router.get('/',(req,res) =>{
     res.json({
-        response: " /"
+        menssage: "LOGIN_INTERFACE"
     })
 })
 
-router.use('/',userRouter);
+router.use('/users',userRouter);
 
 
 module.exports = router
