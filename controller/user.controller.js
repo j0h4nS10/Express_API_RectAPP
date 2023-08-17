@@ -11,8 +11,9 @@ const createUser = async (req, res) => {
         password
     })
     const respons = await user.save()
+    console.log(respons)
     res.json({
-        message: "usuario guardardo",
+        message: "user saved",
         data: respons
     })
 }
@@ -23,14 +24,15 @@ const readAllusers = async (req, res) => {
         if (!users.lenght) {
             res.status(404)
             res.json({
-                message: "empty collection"
+                message: "empty collection",
+                respons
             })
         }
         else {
             res.status(200)
             res.json({
                 message: "showing all data",
-                data: respons
+                data: respons.name
             })
         }
     } catch (err) {
@@ -64,7 +66,6 @@ const readUser = async (req, res) => {
         res.json({
             message: `server error`
         })
-
     }
 }
 
@@ -96,7 +97,6 @@ const updateUser = async (req, res) => {
         res.json({
             message: "server error"
         })
-
     }
 }
 

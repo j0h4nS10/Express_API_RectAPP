@@ -8,7 +8,6 @@ require('./mongoose')
 
 //2
 const app = express();
-
 const routes = require('./routes')
 
 
