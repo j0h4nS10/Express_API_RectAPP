@@ -12,10 +12,10 @@ const { readAllusers,
 const auth = require('../middleware/auth')
 
 // 3
-router.get('/', auth, readAllusers)
-router.get('/:id', auth, readUser)
-router.put('/:id', auth, updateUser)
-router.delete('/:id', auth, deleteUser)
+router.get('/', auth, readAllusers);
+router.get('/:id', auth, readUser);
+router.put('/:id', auth, updateUser);
+router.delete('/:id', auth, deleteUser);
 
 // 4
 module.exports = router;
