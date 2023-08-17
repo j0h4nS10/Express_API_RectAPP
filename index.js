@@ -8,7 +8,7 @@ const connectionDB = require('./mongoose');
 
 //routes
 //2
-const app = express();
+
 const routes = require('./routes')
 
 //
