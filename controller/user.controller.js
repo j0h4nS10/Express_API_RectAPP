@@ -12,7 +12,7 @@ const createUser = async (req, res) => {
     })
     const respons = await user.save()
     res.json({
-        message: "usuario guardardo",
+        message: "user save",
         data: respons
     })
 }

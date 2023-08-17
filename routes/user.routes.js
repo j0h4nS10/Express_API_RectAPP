@@ -7,14 +7,15 @@ const { readAllusers,
     readUser,
     createUser,
     updateUser,
-    deleteUser  } = require('../controller')
+    deleteUser } = require('../controller')
+
+const auth = require('../middleware/auth')
 
 // 3
-router.get('/',readAllusers)
-router.get('/:id',readUser)
-router.post('/',createUser)
-router.put('/:id',updateUser)
-router.delete('/:id',deleteUser)
+router.get('/', auth, readAllusers)
+router.get('/:id', auth, readUser)
+router.put('/:id', auth, updateUser)
+router.delete('/:id', auth, deleteUser)
 
 // 4
 module.exports = router;
