@@ -12,7 +12,10 @@ const userScheme = new mongoose.Schema({
         match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Email inválido'],
         unique: true
     }, 
-    password: String,
+    password: {
+      type: String,
+      required: true
+    },
     salt: String,
 });
 

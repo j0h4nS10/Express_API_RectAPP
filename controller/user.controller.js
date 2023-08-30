@@ -1,8 +1,8 @@
-const { mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const users = mongoose.model('Users')
 
-const createUser = async (req, res) => {
+/*const createUser = async (req, res) => {
     const { name, lastName, email, password } = req.body
     const user = new users({
         name,
@@ -16,7 +16,7 @@ const createUser = async (req, res) => {
         message: "user saved",
         data: respons
     })
-}
+}*/
 
 const readAllusers = async (req, res) => {
     try {
@@ -104,6 +104,7 @@ const deleteUser = async (req, res) => {
     try {
         const { id } = req.params
         const userdb = await users.findById(id)
+        console.log(id, userdb)
         if (!userdb) {
             res.status(404)
             res.json({
@@ -127,7 +128,6 @@ const deleteUser = async (req, res) => {
 }
 
 module.exports = {
-    createUser,
     readAllusers,
     readUser,
     updateUser,

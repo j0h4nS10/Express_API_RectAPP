@@ -1,7 +1,4 @@
-
-
 const { expressjwt: jwt } = require('express-jwt');
-
 
 const getToken = (req) => {
 
@@ -13,7 +10,6 @@ const getToken = (req) => {
 
   return ['Bearer', 'Token', 'Basic'].includes(type) ? token : null;
 };
-
 
 const auth = jwt({
   secret: process.env.JWT_SECRET,

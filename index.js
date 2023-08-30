@@ -6,9 +6,9 @@ const cors = require('cors');
 const connectionDB = require('./mongoose');
 
 
+
 //routes
 //2
-
 const routes = require('./routes')
 
 //
@@ -17,10 +17,11 @@ const app = express();
 //
 app.use(cors())
 app.use(express.json());
+
 connectionDB();
 
 //4
-app.use('/authentication',routes);
+app.use('/v1',routes);
 
 
 //5
