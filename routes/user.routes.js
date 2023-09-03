@@ -13,8 +13,8 @@ const auth = require('../middleware/auth')
 
 
 // 3
-router.get('/',readAllusers);
-router.get('/users:id', auth ,readUser);
+router.get('/', auth ,readAllusers);
+router.get('/users:id', readUser);
 router.put('/users:id', auth ,updateUser);
 router.delete('/users:id', auth ,deleteUser);
 
