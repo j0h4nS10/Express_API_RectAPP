@@ -57,7 +57,10 @@ const readUser = async (req, res) => {
             res.status(200)
             res.json({
                 message: `User`,
-                data: user
+                id: user._id,
+                name: user.name,
+                lastName: user.lastName,
+                email: user.email
             })
         }
     } catch (err) {

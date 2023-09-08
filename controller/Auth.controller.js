@@ -51,6 +51,7 @@ const login = async (req, res) => {
                 data: {
                     token: user.generateJWT(),
                     info: {
+                        userid: user._id,
                         name: user.name,
                         lastName: user.lastName
                     },
